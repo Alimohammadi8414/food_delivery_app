@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hellofood/view/theme.dart';
 
-class TextFieldWidget extends StatelessWidget {
-  const TextFieldWidget({
+class TextFormFieldWidget extends StatelessWidget {
+  const TextFormFieldWidget({
     required this.hinttext,
     required this.obscure,
     required this.prefixIcon,
     required this.suffixIcon,
     required this.width,
     required this.height,
+    required this.controller,
+    required this.inputFormatters,
+    required this.keybourdtype,
+    required this.validator,
     super.key,
   });
   final String hinttext;
@@ -17,15 +22,22 @@ class TextFieldWidget extends StatelessWidget {
   final Widget? suffixIcon;
   final double width;
   final double height;
+  final TextEditingController controller;
+  final TextInputType keybourdtype;
+  final List<TextInputFormatter> inputFormatters;
+  final String? Function(String? value)? validator;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: height,
       width: width,
-      child: TextField(
+      child: TextFormField(
+        validator: validator,
+        keyboardType: keybourdtype,
+        inputFormatters: inputFormatters,
+        controller: controller,
         obscureText: obscure,
-
         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
           fontSize: 18,
           color: AppColors.heavyGray,
@@ -47,6 +59,17 @@ class TextFieldWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
             borderSide: BorderSide.none,
           ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: BorderSide.none,
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: BorderSide.none,
+          ),
+          errorStyle: Theme.of(
+            context,
+          ).textTheme.bodySmall!.copyWith(color: AppColors.lightRed),
           filled: true,
           fillColor: AppColors.gray.withValues(alpha: 0.2),
         ),

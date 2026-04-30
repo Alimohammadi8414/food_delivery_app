@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:hellofood/model/food_&_user.dart';
 import 'package:hellofood/view/theme.dart';
 import 'package:hellofood/view/account_screen/signing_screen.dart';
 import 'package:hellofood/view/account_screen/verification_screen.dart';
+import 'package:hellofood/viewmodel/sign_up_provider.dart';
+
+var user = User();
+var providr = SignupProvider();
 
 class SignButtonWidget extends StatelessWidget {
-  const SignButtonWidget({super.key});
-
+  SignButtonWidget({required this.haveAnAccount, super.key});
+  bool haveAnAccount;
   @override
   Widget build(BuildContext context) {
     return Ink(
@@ -22,14 +27,23 @@ class SignButtonWidget extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(10),
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return VerificationScreen();
-              },
-            ),
-          );
+          if (formState.currentState!.validate()) {
+            providr.signUp(
+              name: nameController.text,
+              lastName: lastNameController.text,
+              phone: int.tryParse(phoneController.text)!,
+              password: passwordController.text,
+            );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return VerificationScreen(haveAnAccount: haveAnAccount);
+                },
+              ),
+            );
+          }
+
           haveAnAccount = true;
         },
         child: Center(

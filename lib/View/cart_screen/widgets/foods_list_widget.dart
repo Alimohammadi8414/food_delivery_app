@@ -24,7 +24,7 @@ class FoodsList extends StatelessWidget {
           width: size.width,
           height: lessThanTwo ? size.height * 0.44 : null,
           child: ListView.builder(
-            shrinkWrap: lessThanTwo ? false : true,
+            shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             itemCount: cartbox.length,
             itemBuilder: (context, index) {

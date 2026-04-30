@@ -17,6 +17,7 @@ void main() async {
   Hive.registerAdapter(UserAdapter());
   await Hive.openBox<Food>('favorite_foods');
   await Hive.openBox<Food>('cart_foods');
+  await Hive.openBox<User>('User');
 
   runApp(
     MultiProvider(

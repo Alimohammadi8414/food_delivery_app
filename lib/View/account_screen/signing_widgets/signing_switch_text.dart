@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class SigningSwitchTextWidget extends StatelessWidget {
   const SigningSwitchTextWidget({
-    required this.tap,
+    required this.ontap,
     required this.haveAnAccount,
     super.key,
   });
 
   final bool haveAnAccount;
-  final void Function() tap;
+  final void Function() ontap;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -26,7 +26,7 @@ class SigningSwitchTextWidget extends StatelessWidget {
         GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: () {
-            tap();
+            ontap();
           },
           child:
               haveAnAccount

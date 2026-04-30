@@ -45,13 +45,13 @@ class Food extends HiveObject {
 @HiveType(typeId: 1)
 class User extends HiveObject {
   @HiveField(0)
-  final String? name;
+  String? name;
   @HiveField(1)
-  final String? lastName;
+  String? lastName;
   @HiveField(2)
-  final int? phone;
+  int? phone;
   @HiveField(3)
-  final String? password;
+  String? password;
   User({this.name, this.lastName, this.phone, this.password});
 }
 

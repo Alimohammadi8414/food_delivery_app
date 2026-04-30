@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hellofood/view/theme.dart';
-import 'package:hellofood/view/account_screen/signing_screen.dart';
 
 class VerificationScreen extends StatefulWidget {
-  const VerificationScreen({super.key});
+  VerificationScreen({required this.haveAnAccount, super.key});
+  bool haveAnAccount;
 
   @override
   State<VerificationScreen> createState() => _VerificationScreenState();
@@ -88,7 +88,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                         fourthDigit.text.isEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          shape: BeveledRectangleBorder(
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadiusGeometry.circular(10),
                           ),
                           backgroundColor: AppColors.lightRed,
@@ -104,12 +104,12 @@ class _VerificationScreenState extends State<VerificationScreen> {
                         ),
                       );
                     } else {
-                      Navigator.pop(context);
-                      haveAnAccount = true;
+                      widget.haveAnAccount = true;
                       firstDigit.clear();
                       secondDigit.clear();
                       thirdDigit.clear();
                       fourthDigit.clear();
+                      Navigator.pop(context);
                     }
                   });
                 },
